@@ -19,7 +19,7 @@ if nargin ==4;rescaletype=1;end;%standard = sigmoid rescaling
 
 %initialize variables
 N4=1;
-obs=10;% CIE 1964 10� standard observer
+obs=10;% CIE 1964 10° standard observer
 XYZwref=[94.81  100.0000  107.32];%D65 is reference white for IPT
 %--------------------------------------------------------------------------
 
@@ -359,6 +359,27 @@ XYZc(XYZc<0)=0;
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+function x = formn(x,n)
+%round to n decimals
+x = round(x.*10^n)./10^n;
+end
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+function h=hue_angle(a,b)
+% HUE_ANGLE: Computes four-quadrant polar angle in degrees from Cartesian coordinates 
+%
+%   Colour Engineering Toolbox
+%   author:    © Phil Green
+%   version:   1.1
+%   date:  	   17-01-2001
+%   book:      http://www.wileyeurope.com/WileyCDA/WileyTitle/productCd-0471486884.html
+%   web:       http://www.digitalcolour.org
+
+h=(180/pi)*atan2(b,a);
+j=(b<0);
+h(j)=h(j)+360;
+end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function IPT=XYZ2IPT_(XYZ)
